@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IntTrackerCrossPlatformMobile.Pages.IntTrackerEditForm">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,0,0" Spacing="0">
+            <ImageButton 
+                         Source="backreturn.png"
+                         Padding="0,0,0,0"
+                         Scale="1"
+                         HorizontalOptions="Start"
+                         Clicked="OnBackButtonClicked"
+                         HeightRequest="40"
+                         WidthRequest="40"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Add new track" VerticalOptions="Center" HorizontalTextAlignment="Center" IsVisible="true" FontSize="Large" FontAttributes="Bold" TextColor="DarkBlue" Margin="10" />
+
+                <Label x:Name="TrackIdlbl" IsVisible="false" Margin="3">TrackId</Label>
+                <Entry x:Name="TrackIdTBox" IsVisible="false" IsReadOnly="True" />
+                <Label Margin="3">Issue Date</Label>
+                <DatePicker IsEnabled="False" x:Name="IssueDate" Margin="3" />
+                <Label Margin="3">Priority</Label>
+                <Picker x:Name="Priority" Title="Select priority" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>READINESS</x:String>
+                        <x:String>Urgent</x:String>
+                        <x:String>HIGH</x:String>
+                        <x:String>MEDIUM</x:String>
+                        <x:String>LOW</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Status</Label>
+                <Picker x:Name="Status" Title="Select status" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>Open</x:String>
+                        <x:String>In progress</x:String>
+                        <x:String>Closed</x:String>
+                        <x:String>Cancelled</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label x:Name="DepartmentContractorLbl" Margin="3">Department</Label>
+                <Picker x:Name="DepartmentContractor" Title="Select department" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>LC / AVIT</x:String> 
+                        <x:String>LOW CURRENT</x:String>
+                        <x:String>CIVIL</x:String>
+                        <x:String>HOUSEKEEPING</x:String>
+                        <x:String>ELECTRICAL</x:String>
+                        <x:String>FIRE AND SAFETY</x:String>
+                        <x:String>GAS</x:String>
+                        <x:String>HVAC</x:String>
+                        <x:String>LANDSCAPING</x:String>
+                        <x:String>KLE</x:String>
+                        <x:String>PEST CONTROL</x:String>
+                        <x:String>ELEVATORS/LIFTS (Schindler)</x:String>
+                        <x:String>PLUMBING</x:String>
+                        <x:String>PUMPS</x:String>
+                        <x:String>SECURITY</x:String>
+                        <x:String>WATER TREATMENT</x:String>
+                        <x:String>WATER FEATURES</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label x:Name="IssuedToLbl" Margin="3">Issued to</Label>
+                <Picker x:Name="IssuedTo" Title="Select department" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>TECHNICAL</x:String>
+                        <x:String>F&amp;B</x:String>
+                        <x:String>HOUSEKEEPING</x:String>
+                        <x:String>CULLINARY</x:String>                        
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Location</Label>     
+                <Picker x:Name="Location" Title="Select location" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>MV</x:String>
+                        <x:String>Building 4</x:String>
+                        <x:String>Building 22B</x:String>
+                        <x:String>Building 23</x:String>
+                        <x:String>Building 24</x:String>
+                        <x:String>Building 25</x:String>
+                        <x:String>Building 26B</x:String>
+                        <x:String>Building 37</x:String>
+                        <x:String>Building 63</x:String>
+                        <x:String>Building 79</x:String>
+                        <x:String>Building 113</x:String>
+                        <x:String>Building 117</x:String>
+                        <x:String>Garage 2</x:String>
+                        <x:String>Garage 4</x:String>
+                        <x:String>Freight farm</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Sublocation</Label>
+                <Entry x:Name="Sublocation" Placeholder="Sublocation" />
+                <Label Margin="3">Specific location</Label>
+                <Entry x:Name="Speclocation" Placeholder="Speclocation" />
+                <Label Margin="3">Location details</Label>
+                <Entry x:Name="LocDetails" Placeholder="Location details" />
+                <Label Margin="3">Task description</Label>  
+                <Editor x:Name="TaskDescription" Text="" HeightRequest="100" />                
+                <Label Margin="3">Reported by</Label>
+                <Entry x:Name="ReportedBy" Placeholder="Reported by" IsReadOnly="True" />
+
+                <Button x:Name="SaveButton" Text="Save" BackgroundColor="CadetBlue" TextColor="White" Margin="3" Clicked="OnSaveFormButtonClicked"/>
+                <Button Text="Cancel" BackgroundColor="DarkRed" TextColor="White" Margin="3" Clicked="OnCloseFormButtonClicked" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

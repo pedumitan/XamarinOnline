@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:IntTrackerCrossPlatformMobile"
+             x:Class="IntTrackerCrossPlatformMobile.EmailForm" Title="Email">
+
+
+
+    <ContentPage.ToolbarItems> 
+        
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+      
+        <StackLayout>
+            <Label FontAttributes="Bold" Text=" How to Send a content with default email application in Xamarin Forms application using Xamarin Essentials for Android and UWP" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Entry x:Name="txtTo" Placeholder="test@test.in"></Entry>
+            <Entry x:Name="txtSub" Placeholder="Enter Your Subject"></Entry>
+            <Editor x:Name="txtContent" HeightRequest="50" ></Editor>
+            <Button x:Name="btnSend" Text="Send Mail" Clicked="btnSend_Click"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

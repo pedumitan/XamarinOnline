@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:android="clr-namespace:IntTrackerCrossPlatformMobile.Pages;assembly=IntTrackerCrossPlatformMobile"
+             x:Class="IntTrackerCrossPlatformMobile.Pages.LoginPage">
+    
+
+    <ContentPage.Content>
+        
+        <StackLayout VerticalOptions="StartAndExpand">
+            <StackLayout VerticalOptions="FillAndExpand" Padding="5" >
+            </StackLayout>
+            
+                <StackLayout VerticalOptions="FillAndExpand" Padding="5" >
+                    <Image Source="tools"></Image> 
+                </StackLayout>
+
+                <StackLayout VerticalOptions="FillAndExpand" Padding="5" >
+                    <Label HorizontalTextAlignment="Center" TextColor="CadetBlue" FontSize="26" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="Int Tracker Mobile"/> 
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="1" Text="Local" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                    <Switch Grid.Column="2" x:Name="dBoSwitch" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Center" OnColor="Orange" ThumbColor="Green"/>
+                    <Label Grid.Column="3"  Text="Cloud"  HorizontalTextAlignment="Start"/>
+                </Grid>
+        </StackLayout>
+
+
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15" >                
+        </StackLayout>
+           
+
+        <StackLayout VerticalOptions="StartAndExpand">
+
+            <Entry HorizontalOptions="Fill"
+               Placeholder="Username"
+               x:Name="usernameEntry"
+               Keyboard="Text"              
+               android:Entry.AutofillHint="Username">
+            </Entry>
+            <Entry HorizontalOptions="Fill"
+               Placeholder="Password"
+               Keyboard="Text"
+               x:Name="passwordEntry"
+               IsPassword="true"
+               android:Entry.AutofillHint="Password">
+            </Entry>
+
+                             
+           
+            <Button x:Name="loginButton" Text="Login" BackgroundColor="CadetBlue" TextColor="White" Clicked="OnLoginButtonClicked" />
+            <Label x:Name="messageLabel" />
+
+            <Label Text="version 1.0.1.23" FontSize="16" HorizontalTextAlignment="Center"  VerticalTextAlignment="End" Padding="0,90,0,0"/>
+
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
+
+

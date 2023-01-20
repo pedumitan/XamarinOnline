@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:IntTrackerCrossPlatformMobile"
+             x:Class="IntTrackerCrossPlatformMobile.MainPage" Title="Main Page">
+
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
+       
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+      
+        <StackLayout>
+            <StackLayout RadioButtonGroup.GroupName="location" Orientation="Horizontal" HorizontalOptions="Center">
+                <RadioButton  x:Name="AlYamamaRbt" Content="Al Yamama" IsChecked="True"/>
+                <RadioButton  x:Name="SharmaRbt" Content="Sharma" />
+            </StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand" >
+                <Button x:Name="ViewListButton"  BackgroundColor="CadetBlue" TextColor="White" Text="View Track List" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Clicked="OnIntTrackerViewFormButtonClicked" />
+            </StackLayout>
+
+            <StackLayout RadioButtonGroup.GroupName="type" Orientation="Horizontal" HorizontalOptions="Center">
+                <RadioButton x:Name="InternalRbt" Content="Internal" IsChecked="True" CheckedChanged="OnSelectionChanged"/>
+                <RadioButton x:Name="ContractorRbt" Content="Contractor" CheckedChanged="OnSelectionChanged"/>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="FillAndExpand" >
+                <Button x:Name="NewTrackButton" Text="New Track" HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand" TextColor="White" BackgroundColor="CadetBlue"  FontAttributes="Bold"  Clicked="OnIntTrackerEditFormButtonClicked" />
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

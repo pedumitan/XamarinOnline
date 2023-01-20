@@ -1,0 +1,62 @@
+Expected at least 1 args, received 0
+CertUtil: Missing argument
+
+Usage:
+  CertUtil [Options] -importPFX [CertificateStoreName] PFXFile [Modifiers]
+  Import certificate and private key
+    CertificateStoreName -- Certificate store name.  See -store.
+    PFXFile -- PFX file to be imported
+    Modifiers -- Comma separated list of one or more of the following:
+            AT_SIGNATURE -- Change the KeySpec to Signature
+            AT_KEYEXCHANGE -- Change the KeySpec to Key Exchange
+            NoExport -- Make the private key non-exportable
+            NoCert -- Do not import the certificate
+            NoChain -- Do not import the certificate chain
+            NoRoot -- Do not import the root certificate
+            Protect -- Protect keys with password
+            NoProtect -- Do not password protect keys
+    Defaults to personal machine store.
+    Modifiers:
+      NoExport
+      ExportEncrypted
+      NoCert
+      NoChain -- End Entity certificate only
+      NoRoot -- Exclude root certificate
+      NoProtect
+      Protect
+      ProtectHigh
+      Pkcs8
+      AT_SIGNATURE
+      AT_KEYEXCHANGE
+      FriendlyName=
+      KeyFriendlyName=
+      KeyDescription=
+      VSM
+
+Options:
+  -f                -- Force overwrite
+  -Enterprise       -- (-ent) Use local machine Enterprise registry certificate store
+  -user             -- Use HKEY_CURRENT_USER keys or certificate store
+  -GroupPolicy      -- (-gp) Use Group Policy certificate store
+  -Unicode          -- Write redirected output in Unicode
+  -gmt              -- Display times as GMT
+  -seconds          -- Display times with seconds and milliseconds
+  -Silent           -- (-q) Use silent flag to acquire crypt context
+  -v                -- Verbose operation
+  -privatekey       -- Display password and private key data
+  -pin PIN                  -- Smart Card PIN
+  -p Password               -- Password
+  -csp Provider             -- Provider
+        KSP -- "Microsoft Software Key Storage Provider"
+        TPM -- "Microsoft Platform Crypto Provider"
+        NGC -- "Microsoft Passport Key Storage Provider"
+        SC -- "Microsoft Smart Card Key Storage Provider"
+  -sid WELL_KNOWN_SID_TYPE  -- Numeric SID
+            22 -- Local System
+            23 -- Local Service
+            24 -- Network Service
+
+CertUtil -?              -- Display a verb list (command list)
+CertUtil -importPFX -?   -- Display help text for the "importPFX" verb
+CertUtil -v -?           -- Display all help text for all verbs
+
