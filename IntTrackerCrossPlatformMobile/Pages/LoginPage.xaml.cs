@@ -18,6 +18,7 @@ using FormsElement = Xamarin.Forms.Entry;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
+using Plugin.Connectivity;
 //using System.ComponentModel.DescriptionAttribute;
 
 namespace IntTrackerCrossPlatformMobile.Pages
@@ -46,6 +47,35 @@ namespace IntTrackerCrossPlatformMobile.Pages
         
         async void OnPutIn(object sender, EventArgs e)
         {
+            var result = await CrossFingerprint.Current.IsAvailableAsync();
+
+            if (result)
+            {
+                var dialogConfig = new AuthenticationRequestConfiguration
+                ("Login using fingerprint", "Confirm login with your fingerprint")
+                {
+                    FallbackTitle = "Use Password",
+                    AllowAlternativeAuthentication = true,
+                };
+
+                var auth = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig);
+                if (auth.Authenticated)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        App.IsUserLoggedIn = true;
+                        Navigation.InsertPageBefore(new MainPage(), this);
+                        await Navigation.PopAsync();
+                        //Xamarin.Forms.Application.Current.MainPage = new MainPage();
+                    });
+
+                }
+                else
+                {
+                    await DisplayAlert("Authentication Failed", "Fingerprint authentication failed", "CLOSE");
+                }
+            }
+
             //if (await CrossFingerprint.Current.IsAvailableAsync(true))
             //{
             //    var result = await CrossFingerprint.Current.AuthenticateAsync(
@@ -64,39 +94,81 @@ namespace IntTrackerCrossPlatformMobile.Pages
             //    await DisplayAlert("Failure", "Biometrics not available", "OK");
             //}
         }
+        public bool CheckConnection()
+        {
+           
+            string conString = Util.connectionStringOnselection;
+            bool isValid = false;
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(conString);
+                con.Open();
+                isValid = true;
+            }
+            catch (SqlException ex)
+            {
+                isValid = false;
+                messageLabel.Text = Environment.NewLine + "Connection is not available!" + Environment.NewLine + "Login failed!";
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+
+            return isValid;
+        }
         async void OnLoginButtonClicked(object sender, EventArgs e)
-        {         
+        {
+            messageLabel.Text = "";
+            bool isConnected = CrossConnectivity.Current.IsConnected;
+            //var isReachable = await CrossConnectivity.Current.IsReachable(Util.connectionStringOnselection, 5000);           
+            
 
-            var user = new User
+            if (isConnected && CheckConnection())
             {
-                Username = usernameEntry.Text,
-                Password = passwordEntry.Text
-            };
-
-            if (usernameEntry.Text == null)
-            {
-                usernameEntry.Text = "";
-                messageLabel.Text = "User field cannot be empty. Please try again! "+ Environment.NewLine + "Login failed!";
-            }
-            if (passwordEntry.Text == null)
-            {
-                passwordEntry.Text = "";
-            }
-            else
-            {
-
-                var isValid = AreCredentialsCorrect(user);
-                if (isValid)
+                //if (CheckConnection())
+                //    messageLabel.Text = messageLabel.Text + Environment.NewLine + "Database server connection not available!";
+                //else
                 {
-                    App.IsUserLoggedIn = true;
-                    Navigation.InsertPageBefore(new MainPage(), this);
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    messageLabel.Text = messageLabel.Text + Environment.NewLine + "Login failed!";
+                    var user = new User
+                    {
+                        Username = usernameEntry.Text,
+                        Password = passwordEntry.Text
+                    };
+
+
+                    if (usernameEntry.Text == null)
+                    {
+                        usernameEntry.Text = "";
+                        messageLabel.Text = "User field cannot be empty. Please try again! " + Environment.NewLine + "Login failed!";
+                    }
+                    if (passwordEntry.Text == null)
+                    {
+                        passwordEntry.Text = "";
+                    }
+                    else
+                    {
+
+                        var isValid = AreCredentialsCorrect(user);
+                        if (isValid)
+                        {
+                            App.IsUserLoggedIn = true;
+                            Navigation.InsertPageBefore(new MainPage(), this);
+                            await Navigation.PopAsync();
+                        }
+                        else
+                        {
+                            messageLabel.Text = messageLabel.Text + Environment.NewLine + "Login failed!";
+                        }
+                    }
                 }
             }
+            else if (!isConnected)
+                messageLabel.Text = messageLabel.Text + Environment.NewLine + "No internet connection!";          
         }
 
         void OnToggled(object sender, ToggledEventArgs e)

@@ -66,7 +66,7 @@
             <Button x:Name="loginButton" Text="Login" BackgroundColor="CadetBlue" TextColor="White" Clicked="OnLoginButtonClicked" />
             <Label x:Name="messageLabel" />
 
-            <Label Text="version 1.0.1.23" FontSize="16" HorizontalTextAlignment="Center"  VerticalTextAlignment="End" Padding="0,90,0,0"/>
+            <Label Text="version 1.0.2.23" FontSize="16" HorizontalTextAlignment="Center"  VerticalTextAlignment="End" Padding="0,90,0,0"/>
 
             </StackLayout>
         </StackLayout>
