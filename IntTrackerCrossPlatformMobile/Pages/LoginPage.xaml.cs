@@ -104,29 +104,7 @@ namespace IntTrackerCrossPlatformMobile.Pages
             //dBoSwitch.Toggled += HandleSwitchToggledByUser;
 
             Util.connectionStringOnselection = dBoSwitch.IsToggled ? Util.connectionString : Util.connectionStringLocal;
-        }
-
-        //async void HandleSwitchToggledByUser(object sender, ToggledEventArgs e)
-        //{
-        //    //if (dBoSwitch.IsToggled)
-        //    //{
-        //    //    await DisplayAlert(
-        //    //        "Connecting to Cloud Database",
-        //    //        "",
-        //    //        "OK"
-        //    //    );
-        //    //    Util.connectionStringOnselection = Util.connectionString;
-        //    //}
-        //    //if (dBoSwitch.IsToggled)
-        //    //{
-        //    //    await DisplayAlert(
-        //    //        "Connecting to Local Database",
-        //    //        "",
-        //    //        "OK"
-        //    //    );
-        //    //    Util.connectionStringOnselection = Util.connectionStringLocal;
-        //    //}
-        //}
+        }      
 
         private void selectUser(string userCheck)
         {

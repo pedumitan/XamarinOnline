@@ -6,12 +6,12 @@
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>certfiletosignwith.pfx</AssemblyOriginatorKeyFile>
-    <Version>1.0.6.22</Version>
+    <Version>1.0.2.23</Version>
     <Authors>Florentin Mitan</Authors>
     <Copyright>Florentin Mitan</Copyright>
     <Company>Hill Robinson Saudi Estates</Company>
-    <AssemblyVersion>1.0.6.22</AssemblyVersion>
-    <FileVersion>1.0.6.22</FileVersion>
+    <AssemblyVersion>1.0.2.23</AssemblyVersion>
+    <FileVersion>1.0.2.23</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
