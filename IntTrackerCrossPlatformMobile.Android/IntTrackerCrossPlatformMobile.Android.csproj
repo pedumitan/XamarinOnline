@@ -83,6 +83,9 @@
     <PackageReference Include="System.Data.SqlClient">
       <Version>4.8.3</Version>
     </PackageReference>
+    <PackageReference Include="ThriveGmbH.BottomNavigationBar.XF">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>5.0.1</Version>
     </PackageReference>
@@ -107,11 +110,17 @@
   <ItemGroup>
     <Compile Include="AutoFillEffect.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\BottomBarPageRenderer.cs" />
     <Compile Include="Resources\layout\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\IPageController.cs" />
+    <Compile Include="Utils\MeasureSpecFactory.cs" />
+    <Compile Include="Utils\PageController.cs" />
+    <Compile Include="Utils\ReflectedProxy.cs" />
+    <Compile Include="Utils\ResourceManagerEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

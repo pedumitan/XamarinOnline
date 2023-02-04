@@ -64,7 +64,7 @@ namespace IntTrackerCrossPlatformMobile.Pages
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         App.IsUserLoggedIn = true;
-                        Navigation.InsertPageBefore(new MainPage(), this);
+                        Navigation.InsertPageBefore(new FirstPage(), this); //(new HomeTabbedPage(), this);//(new MainPage(), this);
                         await Navigation.PopAsync();
                         //Xamarin.Forms.Application.Current.MainPage = new MainPage();
                     });
@@ -157,7 +157,7 @@ namespace IntTrackerCrossPlatformMobile.Pages
                         if (isValid)
                         {
                             App.IsUserLoggedIn = true;
-                            Navigation.InsertPageBefore(new MainPage(), this);
+                            Navigation.InsertPageBefore(new FirstPage(), this); //(new HomeTabbedPage(), this);//(new MainPage(), this);
                             await Navigation.PopAsync();
                         }
                         else

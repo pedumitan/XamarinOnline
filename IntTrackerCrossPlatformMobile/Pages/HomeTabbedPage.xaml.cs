@@ -10,27 +10,43 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using TabbedPage = Xamarin.Forms.TabbedPage;
 
 namespace IntTrackerCrossPlatformMobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IntTrackerViewPage : ContentPage
+
+    public partial class HomeTabbedPage : TabbedPage
     {
         public static IList<IntTrackerGetList> TrackItems { get; set; }
-        public IntTrackerViewPage()
+
+
+        public HomeTabbedPage()
         {
             InitializeComponent();
-
             //NavigationPage.SetHasNavigationBar(this, true);
 
+#pragma warning disable CS0618 // Type or member is obsolete
+            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom)
+             .SetBarItemColor(Color.Black);
+#pragma warning restore CS0618 // Type or member is obsolete
+             //.SetBarSelectedItemColor(Color.Red);
+
+            BarBackgroundColor = Color.DodgerBlue;
+            
+            //BarTextColor = Color.White;
+
             int totalRows = 0;
+            //Util.AlYamamabtn = true;
             Util.connection = new SqlConnection(Util.connectionStringOnselection);
             Util.connection.Open();
             DataTable TrackDt = new DataTable();
             System.Data.DataTable TrackDtAllRows = new System.Data.DataTable();
             DataSet ds = null;
             SqlDataAdapter da = null;
-            string dbo = "[avitsql].[GetData]";
+            string dbo = Util.AlYamamabtn == true ? "[avitsql].[GetData]" : "[avitsql].[GetDataSharma]";
 
 
             using (SqlCommand cmd = new SqlCommand(dbo, Util.connection))
@@ -39,8 +55,8 @@ namespace IntTrackerCrossPlatformMobile.Pages
 
                 cmd.Parameters.Add("@TrackNoFrom", SqlDbType.VarChar).Value = null;// Util.TrackNoFrom;
                 cmd.Parameters.Add("@TrackNoTo", SqlDbType.VarChar).Value = null;// Util.TrackNoTo;
-                cmd.Parameters.Add("@TypeString", SqlDbType.VarChar).Value = null;// Util.TypeString;
-                cmd.Parameters.Add("@StatusString", SqlDbType.VarChar).Value = "Open,In progress";//null;// Util.StatusString;
+                cmd.Parameters.Add("@TypeString", SqlDbType.VarChar).Value = "Internal, Contractor";
+                cmd.Parameters.Add("@StatusString", SqlDbType.VarChar).Value = "Open, In progress";//null;// Util.StatusString;
                 cmd.Parameters.Add("@PriorityString", SqlDbType.VarChar).Value = null;// Util.PriorityString;
                 cmd.Parameters.Add("@LocationString", SqlDbType.VarChar).Value = null;// Util.LocationString;
                 cmd.Parameters.Add("@SubLocationString", SqlDbType.VarChar).Value = null;//Util.SubLocationString;
@@ -97,13 +113,13 @@ namespace IntTrackerCrossPlatformMobile.Pages
                     Track.DepartmentEsom = row["DepartmentEsom"].ToString() != null ? row["DepartmentEsom"].ToString() : "";
 
                     TrackList.Add(Track);
-                     //r++;
+                    //r++;
 
                 }
 
                 TrackItems = new ObservableCollection<IntTrackerGetList>(TrackList);
 
-                IntTrackerDataGridView.ItemsSource = IntTrackerViewPage.TrackItems;
+                IntTrackerDataGridView.ItemsSource = TrackItems; // IntTrackerViewPage.TrackItems;
 
 
 
@@ -113,8 +129,23 @@ namespace IntTrackerCrossPlatformMobile.Pages
         private async void OnBackButtonClicked(object sender, EventArgs e)
         {
 
-            Navigation.InsertPageBefore(new MainPage(), this);
+            Navigation.InsertPageBefore(new FirstPage(), this); //(new MainPage(), this);
             await Navigation.PopAsync();
+        }
+
+        private void OnSelectionChanged(object sender, EventArgs e)
+        {
+            if (InternalRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = true;
+                Util.ContractorMobilebtn = false;
+            }
+            if (ContractorRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = false;
+                Util.ContractorMobilebtn = true;
+            }
+            
         }
 
         //private void IntTrackerDataGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)

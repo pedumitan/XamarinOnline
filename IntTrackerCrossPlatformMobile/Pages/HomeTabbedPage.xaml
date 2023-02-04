@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid" xmlns:viewmodels="clr-namespace:IntTrackerCrossPlatformMobile.ViewModels" x:DataType="viewmodels:GridViewModel"
+            xmlns:bnb="clr-namespace:BottomBar.XamarinForms;assembly=BottomBar.XamarinForms"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+           
+            
+            x:Class="IntTrackerCrossPlatformMobile.Pages.HomeTabbedPage">
+  <!--Pages can be added as references or inline-->
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,0,0" Spacing="0">
+            <ImageButton 
+                         Source="backreturn.png"
+                         Padding="0,0,0,0"
+                         Scale="1"
+                         HorizontalOptions="Start"
+                         
+                         Clicked="OnBackButtonClicked"
+                         HeightRequest="40"
+                         WidthRequest="40"/>
+
+            <StackLayout RadioButtonGroup.GroupName="type" Orientation="Horizontal" Margin="20,0,0,0">
+                <StackLayout></StackLayout>
+                <RadioButton x:Name="InternalRbt" Content="Internal" IsChecked="True" CheckedChanged="OnSelectionChanged"/>
+                <RadioButton x:Name="ContractorRbt" Content="Contractor" CheckedChanged="OnSelectionChanged"/>
+            </StackLayout>
+
+        </StackLayout>
+       
+
+    </NavigationPage.TitleView>
+
+    <ContentPage Title="Home" bnb:BottomBarPageExtensions.TabColor="#7B1FA2" IconImageSource="backreturn.png">
+        <ContentPage.Content>
+            <!-- Place new controls here -->
+            <ScrollView Orientation="Horizontal">
+                <dg:DataGrid x:Name="IntTrackerDataGridView" ItemsSource="{Binding IntTrackerGetLists}" ItemSelected="OnCellDoubleClickClicked" SelectionEnabled="True"  RowHeight="70" HeaderHeight="50"  
+                    BorderColor="#CCCCCC" HeaderBackground="#E0E6F8"  ActiveRowColor="#8899AA">
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
+                    </x:Arguments>
+                    <dg:DataGrid.HeaderFontSize>
+                        <OnIdiom x:TypeArguments="x:Double">
+                            <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                            <OnIdiom.Phone>12</OnIdiom.Phone>
+                        </OnIdiom>
+                    </dg:DataGrid.HeaderFontSize>
+                    <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="ID" PropertyName="TrackId" Width="1*"></dg:DataGridColumn>
+                        <dg:DataGridColumn PropertyName="Type" Width="2*">
+                            <dg:DataGridColumn.FormattedTitle>
+                                <FormattedString>
+                                    <Span Text="Type" FontSize="13" TextColor="Black" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </dg:DataGridColumn.FormattedTitle>
+                        </dg:DataGridColumn>
+                        <dg:DataGridColumn Title="Status" PropertyName="Status" Width="2*"/>
+                        <dg:DataGridColumn Title="Priority" PropertyName="Priority" Width="2*"/>
+                        <dg:DataGridColumn Title="Issue Description" PropertyName="IssueDescription" Width="10*"/>
+                        <dg:DataGridColumn Title="Location" PropertyName="Location" Width="3*"/>
+                        <dg:DataGridColumn Title="Sublocation" PropertyName="Sublocation" Width="3*"/>
+                        <dg:DataGridColumn Title="Specific location" PropertyName="Speclocation" Width="3*"/>
+                        <dg:DataGridColumn Title="Location details" PropertyName="LocDetails" Width="3*"/>
+                        <dg:DataGridColumn Title="Reported by" PropertyName="ReportedBy" Width="3*"/>
+                        <dg:DataGridColumn Title="Department" PropertyName="DepartmentEsom" Width="3*"/>
+                    </dg:DataGrid.Columns>
+                    <dg:DataGrid.RowsBackgroundColorPalette>
+                        <dg:PaletteCollection>
+                            <Color>#F2F2F2</Color>
+                            <Color>#FFFFFF</Color>
+                        </dg:PaletteCollection>
+                    </dg:DataGrid.RowsBackgroundColorPalette>
+                </dg:DataGrid>
+            </ScrollView>
+            
+
+        </ContentPage.Content>        
+    </ContentPage>
+
+    <ContentPage Title="New" bnb:BottomBarPageExtensions.TabColor="#5D4037"  IconImageSource="backreturn.png" >
+        <Label x:Name="JJ" VerticalOptions="Center" HorizontalOptions="Center" Text="New" FontSize="Large"/>
+    </ContentPage>
+
+
+
+    <ContentPage Title="Settings" bnb:BottomBarPageExtensions.TabColor="#FF5252"  IconImageSource="backreturn.png">
+        <Label x:Name="JJj" VerticalOptions="Center" HorizontalOptions="Center" Text="Settings" FontSize="Large"/>
+    </ContentPage>
+    
+    
+</TabbedPage>
