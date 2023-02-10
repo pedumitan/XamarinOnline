@@ -18,23 +18,25 @@ namespace IntTrackerCrossPlatformMobile
 			//Util.Sharmabtn = false;
 			Util.AlYamamabtn = AlYamamaRbt.IsChecked ? true : false;
 			Util.Sharmabtn = SharmaRbt.IsChecked ? true : false;
+			InternalRbt.IsChecked = Util.InternalMobilebtn ? true : false;
+			ContractorRbt.IsChecked = Util.ContractorMobilebtn ? true : false;
 			//Util.InternalMobilebtn = InternalRbt.IsChecked ? true : false;
 			//Util.ContractorMobilebtn = ContractorRbt.IsChecked ? true : false;
 		}
 
 		private void OnSelectionChanged(object sender, EventArgs e)
 		{
-			//if (InternalRbt.IsChecked)
-			//{
-			//	Util.InternalMobilebtn = true;
-			//	Util.ContractorMobilebtn = false;
-			//}
-			//if(ContractorRbt.IsChecked)
-   //         {
-			//	Util.InternalMobilebtn = false; 
-			//	Util.ContractorMobilebtn = true;
-			//}
-		}
+            if (InternalRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = true;
+                Util.ContractorMobilebtn = false;
+            }
+            if (ContractorRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = false;
+                Util.ContractorMobilebtn = true;
+            }
+        }
 
 		async void OnLogoutButtonClicked(object sender, EventArgs e)
 		{

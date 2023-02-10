@@ -55,7 +55,7 @@ namespace IntTrackerCrossPlatformMobile.Pages
 
                 cmd.Parameters.Add("@TrackNoFrom", SqlDbType.VarChar).Value = null;// Util.TrackNoFrom;
                 cmd.Parameters.Add("@TrackNoTo", SqlDbType.VarChar).Value = null;// Util.TrackNoTo;
-                cmd.Parameters.Add("@TypeString", SqlDbType.VarChar).Value = "Internal, Contractor";
+                cmd.Parameters.Add("@TypeString", SqlDbType.VarChar).Value = Util.ContractorMobilebtn ? "Contractor" : "Internal";
                 cmd.Parameters.Add("@StatusString", SqlDbType.VarChar).Value = "Open, In progress";//null;// Util.StatusString;
                 cmd.Parameters.Add("@PriorityString", SqlDbType.VarChar).Value = null;// Util.PriorityString;
                 cmd.Parameters.Add("@LocationString", SqlDbType.VarChar).Value = null;// Util.LocationString;
@@ -133,20 +133,20 @@ namespace IntTrackerCrossPlatformMobile.Pages
             await Navigation.PopAsync();
         }
 
-        private void OnSelectionChanged(object sender, EventArgs e)
-        {
-            if (InternalRbt.IsChecked)
-            {
-                Util.InternalMobilebtn = true;
-                Util.ContractorMobilebtn = false;
-            }
-            if (ContractorRbt.IsChecked)
-            {
-                Util.InternalMobilebtn = false;
-                Util.ContractorMobilebtn = true;
-            }
+        //private void OnSelectionChanged(object sender, EventArgs e)
+        //{
+        //    if (InternalRbt.IsChecked)
+        //    {
+        //        Util.InternalMobilebtn = true;
+        //        Util.ContractorMobilebtn = false;
+        //    }
+        //    if (ContractorRbt.IsChecked)
+        //    {
+        //        Util.InternalMobilebtn = false;
+        //        Util.ContractorMobilebtn = true;
+        //    }
             
-        }
+        //}
 
         //private void IntTrackerDataGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{

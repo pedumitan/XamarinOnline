@@ -19,13 +19,7 @@
                          
                          Clicked="OnBackButtonClicked"
                          HeightRequest="40"
-                         WidthRequest="40"/>
-
-            <StackLayout RadioButtonGroup.GroupName="type" Orientation="Horizontal" Margin="20,0,0,0">
-                <StackLayout></StackLayout>
-                <RadioButton x:Name="InternalRbt" Content="Internal" IsChecked="True" CheckedChanged="OnSelectionChanged"/>
-                <RadioButton x:Name="ContractorRbt" Content="Contractor" CheckedChanged="OnSelectionChanged"/>
-            </StackLayout>
+                         WidthRequest="40"/>          
 
         </StackLayout>
        

@@ -130,7 +130,7 @@ namespace IntTrackerCrossPlatformMobile
         public static bool AlYamamabtn = true;
 
         public static bool InternalMobilebtn = false;
-        public static bool ContractorMobilebtn = false;
+        public static bool ContractorMobilebtn = true;
 
         //page
         public static int pageNum = 0;

@@ -13,10 +13,17 @@
     <ContentPage.Content>
       
         <StackLayout>
-            <StackLayout RadioButtonGroup.GroupName="location" Orientation="Horizontal" HorizontalOptions="Center" Padding="100">
+            <StackLayout RadioButtonGroup.GroupName="location" Orientation="Horizontal" HorizontalOptions="Center" Padding="50">
                 <RadioButton  x:Name="AlYamamaRbt" Content="Al Yamama" IsChecked="True"/>
                 <RadioButton  x:Name="SharmaRbt" Content="Sharma" />
             </StackLayout>
+
+            <StackLayout RadioButtonGroup.GroupName="type" Orientation="Horizontal" HorizontalOptions="Center" Padding="50">
+                <StackLayout></StackLayout>                
+                <RadioButton x:Name="ContractorRbt" Content="Contractor" IsChecked="True" CheckedChanged="OnSelectionChanged"/>
+                <RadioButton x:Name="InternalRbt" Content="Internal" CheckedChanged="OnSelectionChanged"/>
+            </StackLayout>
+
             <StackLayout VerticalOptions="FillAndExpand" >
                 <Button x:Name="ViewListButton"  BackgroundColor="CadetBlue" TextColor="White" Text="View Track List" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Clicked="OnIntTrackerViewFormButtonClicked" />
             </StackLayout>         
