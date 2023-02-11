@@ -18,10 +18,17 @@
 
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Label Text="Add new track" VerticalOptions="Center" HorizontalTextAlignment="Center" IsVisible="true" FontSize="Large" FontAttributes="Bold" TextColor="DarkBlue" Margin="10" />
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Center" Spacing="0">
+                <StackLayout Orientation="Horizontal"  HorizontalOptions="End">
+                    <Label Text="Add/edit track" VerticalOptions="Center" HorizontalTextAlignment="Center" IsVisible="true" FontSize="Large" FontAttributes="Bold" TextColor="DarkBlue" Margin="10" />
 
+                </StackLayout>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+
+                    
                 <Label x:Name="TrackIdlbl" IsVisible="false" Margin="3">TrackId</Label>
                 <Entry x:Name="TrackIdTBox" IsVisible="false" IsReadOnly="True" />
                 <Label Margin="3">Issue Date</Label>
@@ -109,7 +116,8 @@
 
                 <Button x:Name="SaveButton" Text="Save" BackgroundColor="CadetBlue" TextColor="White" Margin="3" Clicked="OnSaveFormButtonClicked"/>
                 <Button Text="Cancel" BackgroundColor="DarkRed" TextColor="White" Margin="3" Clicked="OnCloseFormButtonClicked" />
-            </StackLayout>
-        </ScrollView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

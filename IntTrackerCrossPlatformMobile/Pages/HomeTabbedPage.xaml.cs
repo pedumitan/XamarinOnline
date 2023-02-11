@@ -26,7 +26,14 @@ namespace IntTrackerCrossPlatformMobile.Pages
         public HomeTabbedPage()
         {
             InitializeComponent();
+
+            this.CurrentPage = this.setSchedulePage;
             //NavigationPage.SetHasNavigationBar(this, true);
+
+            //Util.AlYamamabtn = AlYamamaRbt.IsChecked ? true : false;
+            //Util.Sharmabtn = SharmaRbt.IsChecked ? true : false;
+            //InternalRbt.IsChecked = Util.InternalMobilebtn ? true : false;
+            //ContractorRbt.IsChecked = Util.ContractorMobilebtn ? true : false;
 
 #pragma warning disable CS0618 // Type or member is obsolete
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom)
@@ -35,9 +42,13 @@ namespace IntTrackerCrossPlatformMobile.Pages
              //.SetBarSelectedItemColor(Color.Red);
 
             BarBackgroundColor = Color.DodgerBlue;
-            
+
             //BarTextColor = Color.White;
 
+            Load();
+        }
+        private void Load()
+        {
             int totalRows = 0;
             //Util.AlYamamabtn = true;
             Util.connection = new SqlConnection(Util.connectionStringOnselection);
@@ -125,7 +136,9 @@ namespace IntTrackerCrossPlatformMobile.Pages
 
             }
             Util.connection.Close();
+            //LoadOrdersAsync();
         }
+
         private async void OnBackButtonClicked(object sender, EventArgs e)
         {
 
@@ -133,20 +146,37 @@ namespace IntTrackerCrossPlatformMobile.Pages
             await Navigation.PopAsync();
         }
 
-        //private void OnSelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (InternalRbt.IsChecked)
-        //    {
-        //        Util.InternalMobilebtn = true;
-        //        Util.ContractorMobilebtn = false;
-        //    }
-        //    if (ContractorRbt.IsChecked)
-        //    {
-        //        Util.InternalMobilebtn = false;
-        //        Util.ContractorMobilebtn = true;
-        //    }
-            
-        //}
+        private void OnSelectionChanged(object sender, EventArgs e)
+        {
+            if (InternalRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = true;
+                Util.ContractorMobilebtn = false;
+                this.Load();
+                //LoadOrdersAsync(); 
+                //Navigation.PushAsync(this);
+            }
+            if (ContractorRbt.IsChecked)
+            {
+                Util.InternalMobilebtn = false;
+                Util.ContractorMobilebtn = true;
+                this.Load();
+                // Navigation.PushAsync(this);
+            }
+            if (AlYamamaRbt.IsChecked)
+            {
+                Util.AlYamamabtn = true;
+                Util.Sharmabtn = false;
+                this.Load();               
+            }
+            if (SharmaRbt.IsChecked)
+            {
+                Util.AlYamamabtn = false;
+                Util.Sharmabtn = true;
+                this.Load();
+            }
+
+        }
 
         //private void IntTrackerDataGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
@@ -184,6 +214,79 @@ namespace IntTrackerCrossPlatformMobile.Pages
         private void ToolbarItem_ChildAdded(object sender, ElementEventArgs e)
         {
 
+        }
+
+        async void OnSaveFormButtonClicked(object sender, EventArgs e)
+        {
+            Util.connection = new SqlConnection(Util.connectionStringOnselection);
+            Util.connection.Open();
+
+
+            String st = "";
+            if (Util.newItem)
+                st = "INSERT INTO [dbo].[TechIntTracker] (DateCreated,Type,CreatedBy,ReportedBy,Position, DepartmentInternal,AssignedTo,LastUpdate,HostMachine,HostMaccAdress,IPAdress,Testing,Priority,Status,DepartmentEsom,Location,SublocationArea,SpecificLocation,LocationDetails,IssueDescription) values (@DateCreated,@Type,@CreatedBy,@ReportedBy,@Position,@DepartmentInternal,@AssignedTo,@LastUpdate,@HostMachine,@HostMaccAdress,@IPAdress,@Testing,@Priority,@Status,@DepartmentEsom,@Location,@SublocationArea,@SpecificLocation,@LocationDetails,@IssueDescription)";
+            else
+                st = "UPDATE [dbo].[TechIntTracker] SET " +
+                    "DateCreated =  @DateCreated," +
+                    "Type = @Type,CreatedBy = @CreatedBy,ReportedBy = @ReportedBy," +
+                    "Position = @Position, " +
+                    "DepartmentInternal = @DepartmentInternal," +
+                    "AssignedTo = @AssignedTo,LastUpdate = @LastUpdate,HostMachine = @HostMachine,HostMaccAdress = @HostMaccAdress," +
+                    "IPAdress = @IPAdress," +
+                    "Testing = @Testing," +
+                    "Priority = @Priority,Status = @Status,DepartmentEsom = @DepartmentEsom," +
+                    "Location = @Location,SublocationArea = @SublocationArea,SpecificLocation = @SpecificLocation,LocationDetails = @LocationDetails,IssueDescription = @IssueDescription " +
+                    "WHERE TrackId = " + Util.trackId;
+
+            SqlCommand cmd = new SqlCommand(st, Util.connection);
+
+            cmd.Parameters.AddWithValue("@DateCreated", DateTime.ParseExact(IssueDate.Date.ToString("MM/dd/yyyy hh:mm"), "MM/dd/yyyy hh:mm", System.Globalization.CultureInfo.InvariantCulture));
+            cmd.Parameters.AddWithValue("@Type", Util.ContractorMobilebtn ? "Contractor".ToString() : "Internal".ToString());
+            cmd.Parameters.AddWithValue("@CreatedBy", Util.userIdConnected);
+            cmd.Parameters.AddWithValue("@ReportedBy", Util.fullNameConnected.ToString());
+            cmd.Parameters.AddWithValue("@Position", Util.positionUserConnected.ToString());
+            cmd.Parameters.AddWithValue("@DepartmentInternal", Util.departmentConnected.ToString());
+            cmd.Parameters.AddWithValue("@LastUpdate", DateTime.ParseExact(IssueDate.Date.ToString("MM/dd/yyyy hh:mm"), "MM/dd/yyyy hh:mm", System.Globalization.CultureInfo.InvariantCulture));
+            cmd.Parameters.AddWithValue("@HostMachine", Util.userMachine.ToString());
+            cmd.Parameters.AddWithValue("@HostMaccAdress", Util.userMachineMacc.ToString());
+            cmd.Parameters.AddWithValue("@IPAdress", Util.userIp.ToString());
+            cmd.Parameters.AddWithValue("@Testing", "0".ToString());
+            cmd.Parameters.AddWithValue("@Priority", Priority.SelectedItem != null ? Priority.SelectedItem.ToString() : "LOW");
+            cmd.Parameters.AddWithValue("@Status", Status.SelectedItem != null ? Status.SelectedItem.ToString() : "Open");
+            cmd.Parameters.AddWithValue("@DepartmentEsom", DepartmentContractor.SelectedItem != null ? DepartmentContractor.SelectedItem.ToString() : "");
+            cmd.Parameters.AddWithValue("@AssignedTo", IssuedTo.SelectedItem != null ? IssuedTo.SelectedItem.ToString() : "");
+            cmd.Parameters.AddWithValue("@Location", Location.SelectedItem != null ? Location.SelectedItem.ToString() : "MV");
+            cmd.Parameters.AddWithValue("@SublocationArea", Sublocation.Text != null ? Sublocation.Text : "");
+            cmd.Parameters.AddWithValue("@SpecificLocation", Speclocation.Text != null ? Speclocation.Text : "");
+            cmd.Parameters.AddWithValue("@LocationDetails", LocDetails.Text != null ? LocDetails.Text : "");
+            cmd.Parameters.AddWithValue("@IssueDescription", TaskDescription.Text != null ? TaskDescription.Text : "");
+
+            cmd.ExecuteNonQuery();
+            Util.connection.Close();
+
+            Navigation.InsertPageBefore(new MainPage(), this);
+            await Navigation.PopAsync();
+        }
+
+
+        async void OnCloseFormButtonClicked(object sender, EventArgs e)
+        {
+            Util.InternalMobilebtn = false;
+            Util.ContractorMobilebtn = false;
+
+            if (Util.newItem)
+                Navigation.InsertPageBefore(new MainPage(), this);
+            else
+                Navigation.InsertPageBefore(new IntTrackerViewPage(), this);
+            await Navigation.PopAsync();
+        }
+
+        async void OnLogoutButtonClicked(object sender, EventArgs e)
+        {
+            App.IsUserLoggedIn = false;
+            Util.connectionStringOnselection = Util.connectionStringLocal;
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
         }
     }
 }

@@ -1,0 +1,20 @@
+ <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,0,0" Spacing="0">
+            <ImageButton 
+                         Source="backreturn.png"
+                         Padding="0,0,0,0"
+                         Scale="1"
+                         HorizontalOptions="Start"
+                         
+                         Clicked="OnBackButtonClicked"
+                         HeightRequest="40"
+                         WidthRequest="40"/>
+            
+
+
+        </StackLayout>
+       
+
+    </NavigationPage.TitleView>
+
+

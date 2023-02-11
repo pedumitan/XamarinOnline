@@ -157,7 +157,7 @@ namespace IntTrackerCrossPlatformMobile.Pages
                         if (isValid)
                         {
                             App.IsUserLoggedIn = true;
-                            Navigation.InsertPageBefore(new FirstPage(), this); //(new HomeTabbedPage(), this);//(new MainPage(), this);
+                            Navigation.InsertPageBefore(new HomeTabbedPage(), this); //(new FirstPage(), this); //(new HomeTabbedPage(), this);//(new MainPage(), this);
                             await Navigation.PopAsync();
                         }
                         else

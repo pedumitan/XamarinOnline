@@ -9,75 +9,207 @@
             
             x:Class="IntTrackerCrossPlatformMobile.Pages.HomeTabbedPage">
   <!--Pages can be added as references or inline-->
+    
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,0,0" Spacing="0">
-            <ImageButton 
-                         Source="backreturn.png"
-                         Padding="0,0,0,0"
-                         Scale="1"
-                         HorizontalOptions="Start"
-                         
-                         Clicked="OnBackButtonClicked"
-                         HeightRequest="40"
-                         WidthRequest="40"/>          
+       
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Center" Spacing="0">
 
-        </StackLayout>
+            <StackLayout RadioButtonGroup.GroupName="location" WidthRequest="70" Orientation="Vertical"  VerticalOptions="Start">
+                <RadioButton  x:Name="AlYamamaRbt" Content="AY"   Padding="-5,-2,-5,-5" FontSize="Micro" IsChecked="True" CheckedChanged="OnSelectionChanged"/>
+                <RadioButton  x:Name="SharmaRbt" Content="Sharma" Padding="-5,-7,-5,-5" FontSize="Micro" CheckedChanged="OnSelectionChanged"/>
+            </StackLayout>
+            <StackLayout HeightRequest="15"></StackLayout>
+            <StackLayout RadioButtonGroup.GroupName="type"  WidthRequest="80" Orientation="Vertical" VerticalOptions="End">
+                <RadioButton x:Name="ContractorRbt" Content="Contractor" Padding="-5,-2,-5,-5" IsChecked="True" FontSize="Micro" CheckedChanged="OnSelectionChanged"/>
+                <RadioButton x:Name="InternalRbt" Content="Internal"  Padding="-5,-7,-5,-5" FontSize="Micro" CheckedChanged="OnSelectionChanged"/>
+            </StackLayout>
+            <StackLayout HeightRequest="15"></StackLayout>
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="End">
+                <Button Text="Logout" Padding="5,2,5,5" BackgroundColor="Blue" HorizontalOptions="End" Clicked="OnLogoutButtonClicked"/>
+            </StackLayout>
+        </StackLayout>      
        
 
     </NavigationPage.TitleView>
+    
 
-    <ContentPage Title="Home" bnb:BottomBarPageExtensions.TabColor="#7B1FA2" IconImageSource="backreturn.png">
+
+   
+
+    <ContentPage Title="Add/edit track" bnb:BottomBarPageExtensions.TabColor="#5D4037"  IconImageSource="backreturn.png" >
+        
+       
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Center" Spacing="0">              
+                <StackLayout Orientation="Horizontal"  HorizontalOptions="End">
+                    <Label Text="Add/edit track" VerticalOptions="Center" HorizontalTextAlignment="Center" IsVisible="true" FontSize="Large" FontAttributes="Bold" TextColor="DarkBlue" Margin="10" />
+                                  
+                </StackLayout>
+            </StackLayout>
+            <ScrollView>
+            <StackLayout>
+               
+
+                <Label x:Name="TrackIdlbl" IsVisible="false" Margin="3">TrackId</Label>
+                <Entry x:Name="TrackIdTBox" IsVisible="false" IsReadOnly="True" />
+                <Label Margin="3">Issue Date</Label>
+                <DatePicker IsEnabled="False" x:Name="IssueDate" Margin="3" />
+                <Label Margin="3">Priority</Label>
+                <Picker x:Name="Priority" Title="Select priority" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>READINESS</x:String>
+                        <x:String>Urgent</x:String>
+                        <x:String>HIGH</x:String>
+                        <x:String>MEDIUM</x:String>
+                        <x:String>LOW</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Status</Label>
+                <Picker x:Name="Status" Title="Select status" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>Open</x:String>
+                        <x:String>In progress</x:String>
+                        <x:String>Closed</x:String>
+                        <x:String>Cancelled</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label x:Name="DepartmentContractorLbl" Margin="3">Department</Label>
+                <Picker x:Name="DepartmentContractor" Title="Select department" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>LC / AVIT</x:String>
+                        <x:String>LOW CURRENT</x:String>
+                        <x:String>CIVIL</x:String>
+                        <x:String>HOUSEKEEPING</x:String>
+                        <x:String>ELECTRICAL</x:String>
+                        <x:String>FIRE AND SAFETY</x:String>
+                        <x:String>GAS</x:String>
+                        <x:String>HVAC</x:String>
+                        <x:String>LANDSCAPING</x:String>
+                        <x:String>KLE</x:String>
+                        <x:String>PEST CONTROL</x:String>
+                        <x:String>ELEVATORS/LIFTS (Schindler)</x:String>
+                        <x:String>PLUMBING</x:String>
+                        <x:String>PUMPS</x:String>
+                        <x:String>SECURITY</x:String>
+                        <x:String>WATER TREATMENT</x:String>
+                        <x:String>WATER FEATURES</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label x:Name="IssuedToLbl" Margin="3">Issued to</Label>
+                <Picker x:Name="IssuedTo" Title="Select department" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>TECHNICAL</x:String>
+                        <x:String>F&amp;B</x:String>
+                        <x:String>HOUSEKEEPING</x:String>
+                        <x:String>CULLINARY</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Location</Label>
+                <Picker x:Name="Location" Title="Select location" Margin="3" TitleColor="DarkBlue">
+                    <Picker.Items>
+                        <x:String>MV</x:String>
+                        <x:String>Building 4</x:String>
+                        <x:String>Building 22B</x:String>
+                        <x:String>Building 23</x:String>
+                        <x:String>Building 24</x:String>
+                        <x:String>Building 25</x:String>
+                        <x:String>Building 26B</x:String>
+                        <x:String>Building 37</x:String>
+                        <x:String>Building 63</x:String>
+                        <x:String>Building 79</x:String>
+                        <x:String>Building 113</x:String>
+                        <x:String>Building 117</x:String>
+                        <x:String>Garage 2</x:String>
+                        <x:String>Garage 4</x:String>
+                        <x:String>Freight farm</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Margin="3">Sublocation</Label>
+                <Entry x:Name="Sublocation" Placeholder="Sublocation" />
+                <Label Margin="3">Specific location</Label>
+                <Entry x:Name="Speclocation" Placeholder="Speclocation" />
+                <Label Margin="3">Location details</Label>
+                <Entry x:Name="LocDetails" Placeholder="Location details" />
+                <Label Margin="3">Task description</Label>
+                <Editor x:Name="TaskDescription" Text="" HeightRequest="100" />
+                <Label Margin="3">Reported by</Label>
+                <Entry x:Name="ReportedBy" Placeholder="Reported by" IsReadOnly="True" />
+
+                <Button x:Name="SaveButton" Text="Save" BackgroundColor="CadetBlue" TextColor="White" Margin="3" Clicked="OnSaveFormButtonClicked"/>
+                <Button Text="Cancel" BackgroundColor="DarkRed" TextColor="White" Margin="3" Clicked="OnCloseFormButtonClicked" />
+            </StackLayout>
+        </ScrollView>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage x:Name="setSchedulePage" Title="List" bnb:BottomBarPageExtensions.TabColor="#7B1FA2" IconImageSource="backreturn.png">
+
         <ContentPage.Content>
             <!-- Place new controls here -->
-            <ScrollView Orientation="Horizontal">
-                <dg:DataGrid x:Name="IntTrackerDataGridView" ItemsSource="{Binding IntTrackerGetLists}" ItemSelected="OnCellDoubleClickClicked" SelectionEnabled="True"  RowHeight="70" HeaderHeight="50"  
-                    BorderColor="#CCCCCC" HeaderBackground="#E0E6F8"  ActiveRowColor="#8899AA">
-                    <x:Arguments>
-                        <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
-                    </x:Arguments>
-                    <dg:DataGrid.HeaderFontSize>
-                        <OnIdiom x:TypeArguments="x:Double">
-                            <OnIdiom.Tablet>15</OnIdiom.Tablet>
-                            <OnIdiom.Phone>12</OnIdiom.Phone>
-                        </OnIdiom>
-                    </dg:DataGrid.HeaderFontSize>
-                    <dg:DataGrid.Columns>
-                        <dg:DataGridColumn Title="ID" PropertyName="TrackId" Width="1*"></dg:DataGridColumn>
-                        <dg:DataGridColumn PropertyName="Type" Width="2*">
-                            <dg:DataGridColumn.FormattedTitle>
-                                <FormattedString>
-                                    <Span Text="Type" FontSize="13" TextColor="Black" FontAttributes="Bold"/>
-                                </FormattedString>
-                            </dg:DataGridColumn.FormattedTitle>
-                        </dg:DataGridColumn>
-                        <dg:DataGridColumn Title="Status" PropertyName="Status" Width="2*"/>
-                        <dg:DataGridColumn Title="Priority" PropertyName="Priority" Width="2*"/>
-                        <dg:DataGridColumn Title="Issue Description" PropertyName="IssueDescription" Width="10*"/>
-                        <dg:DataGridColumn Title="Location" PropertyName="Location" Width="3*"/>
-                        <dg:DataGridColumn Title="Sublocation" PropertyName="Sublocation" Width="3*"/>
-                        <dg:DataGridColumn Title="Specific location" PropertyName="Speclocation" Width="3*"/>
-                        <dg:DataGridColumn Title="Location details" PropertyName="LocDetails" Width="3*"/>
-                        <dg:DataGridColumn Title="Reported by" PropertyName="ReportedBy" Width="3*"/>
-                        <dg:DataGridColumn Title="Department" PropertyName="DepartmentEsom" Width="3*"/>
-                    </dg:DataGrid.Columns>
-                    <dg:DataGrid.RowsBackgroundColorPalette>
-                        <dg:PaletteCollection>
-                            <Color>#F2F2F2</Color>
-                            <Color>#FFFFFF</Color>
-                        </dg:PaletteCollection>
-                    </dg:DataGrid.RowsBackgroundColorPalette>
-                </dg:DataGrid>
-            </ScrollView>
+           
+                <StackLayout>
+                    <ScrollView Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="550">
+                        <dg:DataGrid x:Name="IntTrackerDataGridView" ItemsSource="{Binding IntTrackerGetLists}" ItemSelected="OnCellDoubleClickClicked" SelectionEnabled="True"  RowHeight="70" HeaderHeight="50"  
+                        BorderColor="#CCCCCC" HeaderBackground="#E0E6F8"  ActiveRowColor="#8899AA">
+                            <x:Arguments>
+                                <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
+                            </x:Arguments>
+                            <dg:DataGrid.HeaderFontSize>
+                                <OnIdiom x:TypeArguments="x:Double">
+                                    <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                                    <OnIdiom.Phone>12</OnIdiom.Phone>
+                                </OnIdiom>
+                            </dg:DataGrid.HeaderFontSize>
+                            <dg:DataGrid.Columns>
+                                <dg:DataGridColumn Title="ID" PropertyName="TrackId" Width="1*"></dg:DataGridColumn>
+                                <dg:DataGridColumn PropertyName="Type" Width="2*">
+                                    <dg:DataGridColumn.FormattedTitle>
+                                        <FormattedString>
+                                            <Span Text="Type" FontSize="13" TextColor="Black" FontAttributes="Bold"/>
+                                        </FormattedString>
+                                    </dg:DataGridColumn.FormattedTitle>
+                                </dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Status" PropertyName="Status" Width="2*"/>
+                                <dg:DataGridColumn Title="Priority" PropertyName="Priority" Width="2*"/>
+                                <dg:DataGridColumn Title="Issue Description" PropertyName="IssueDescription" Width="10*"/>
+                                <dg:DataGridColumn Title="Location" PropertyName="Location" Width="3*"/>
+                                <dg:DataGridColumn Title="Sublocation" PropertyName="Sublocation" Width="3*"/>
+                                <dg:DataGridColumn Title="Specific location" PropertyName="Speclocation" Width="3*"/>
+                                <dg:DataGridColumn Title="Location details" PropertyName="LocDetails" Width="3*"/>
+                                <dg:DataGridColumn Title="Reported by" PropertyName="ReportedBy" Width="3*"/>
+                                <dg:DataGridColumn Title="Department" PropertyName="DepartmentEsom" Width="3*"/>
+                            </dg:DataGrid.Columns>
+                            <dg:DataGrid.RowsBackgroundColorPalette>
+                                <dg:PaletteCollection>
+                                    <Color>#F2F2F2</Color>
+                                    <Color>#FFFFFF</Color>
+                                </dg:PaletteCollection>
+                            </dg:DataGrid.RowsBackgroundColorPalette>
+                        </dg:DataGrid>
+
+                    </ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Button x:Name="btnPrevPage" Text="Prev"/>
+                        <Entry x:Name="GoToPage" Text="1" WidthRequest="25"/>
+                        <Button x:Name="btnGoToPage" Text="Go"/>
+                        <Button x:Name="btnNextPage" Text="Next"/>
+
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <CheckBox x:Name="chBoxOpen" IsChecked="True"></CheckBox>
+                            <Label x:Name="lblOpen" Text="Open/In progress"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <CheckBox x:Name="chBoxAll"></CheckBox>
+                            <Label x:Name="lblAll" Text="  All"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
             
+            </StackLayout>
+        </ContentPage.Content>
 
-        </ContentPage.Content>        
     </ContentPage>
-
-    <ContentPage Title="New" bnb:BottomBarPageExtensions.TabColor="#5D4037"  IconImageSource="backreturn.png" >
-        <Label x:Name="JJ" VerticalOptions="Center" HorizontalOptions="Center" Text="New" FontSize="Large"/>
-    </ContentPage>
-
-
 
     <ContentPage Title="Settings" bnb:BottomBarPageExtensions.TabColor="#FF5252"  IconImageSource="backreturn.png">
         <Label x:Name="JJj" VerticalOptions="Center" HorizontalOptions="Center" Text="Settings" FontSize="Large"/>
